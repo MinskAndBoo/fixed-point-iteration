@@ -1,0 +1,11 @@
+# Ignore everything
+*
+
+# Un-ignore what we publish
+!.gitignore
+!SKILL.md
+!README.md
+!publishing-guide.md
+
+# Kate swap files
+*.kate-swp
