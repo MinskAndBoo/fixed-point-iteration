@@ -1,11 +1,11 @@
 ---
 name: fixed-point-iteration
-description: "Drive a text artifact (file, doc, code) to a fixed point: make one cheap, honest edit, re-read the whole thing, repeat until a full read surfaces no further ambiguity to reduce. Use when polishing a draft toward 90%, tightening a document for its next reader, or when something 'looks done' but small ambiguities remain."
+description: "Default editing discipline for any text artifact (file, doc, code, config, prompt): establish a completion criterion, then make one cheap, honest edit, re-read the whole thing, repeat until the criterion is met. Use for any multi-edit task — the loop prevents batching, re-litigation, and over-generation."
 ---
 
 # Fixed-Point Iteration
 
-Fixed-point iteration: apply a minimal transformation (an edit), re-observe the state (a re-read), and repeat until the state is at a fixed point — a full read surfaces no further ambiguity to reduce. The re-read is what makes each pass honest: it refreshes what you attend to, so the next edit is made against the file as it actually is, not as you remember it.
+Fixed-point iteration: establish a completion criterion, then apply a minimal transformation (an edit), re-observe the state (a re-read), and repeat until the criterion is met. The re-read is what makes each pass honest: it refreshes what you attend to, so the next edit is made against the file as it actually is, not as you remember it.
 
 The name is the logic; the physics is the explanation. "Fixed-point iteration" names the loop; "LLM attention map" is the physics that explains why it converges.
 
@@ -20,21 +20,26 @@ So there are three reasons why every correct edit, no matter how minor, is a goo
 
 ## When to use
 
+Any time you are making edits to a text artifact — file, doc, code, config, prompt. This is the default editing discipline, not a special polishing mode. Specifically:
+
 - Driving a piece of work to a fixed point by making cheap, honest, one-at-a-time edits.
-- Polishing a draft toward 90%: the gap between 80% and 90% is the ambiguities you leave behind, and each cheap round halves them.
+- Polishing a draft: the gap between 80% and 90% is the ambiguities you leave behind, and each cheap round halves them.
 - Tightening a document for its next reader.
+- Any multi-edit task where the model is tempted to batch, re-litigate, or over-generate.
 - Sidestepping the failure modes that derail improvement (see anti-patterns).
 
 ## Practiced discipline
 
+0. Establish the completion criterion: what does "done" look like? Derive it from the user's ask, or ask if genuinely ambiguous. Name it before starting the loop.
+
 REPEAT:
 1. Read the whole file to see its current state.
-2. Find an improvement you can make towards achieving the completion criterion.
+2. Find an improvement you can make towards achieving the criterion.
 3. Make that one edit as cheaply as correctness allows. The reasoning must be cheaper than the edit: if the deliberation costs more than the change it produces, stop and make the obvious edit.
 
-UNTIL a full read surfaces no further ambiguity to reduce. Polishing rounds are cheap and each one halves what the next reader has to puzzle around — the gap between 80% and 90% is the ambiguities you leave behind.
+UNTIL the criterion is met.
 
-Then switch instruments, because "nothing pops" is not "it's consistent": run targeted invariant checks — pick a specific global property you suspect might be violated and test it directly. If a check fails, fix it and return to the loop.
+Then switch instruments, because "the criterion is met" is not "it's consistent": run targeted invariant checks against the criterion — pick a specific global property you suspect might be violated and test it directly. One such check: does a full read surface no further ambiguity to reduce? If a check fails, fix it and return to the loop.
 
 ## Anti-patterns
 
